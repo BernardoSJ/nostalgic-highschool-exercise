@@ -1,5 +1,6 @@
 
 import java.util.regex.Pattern;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 /*
@@ -7,7 +8,6 @@ import javax.swing.JOptionPane;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Bernardo Salinas Jaquez
@@ -17,47 +17,46 @@ public class Main extends javax.swing.JFrame {
     /**
      * Creates new form Main
      */
-    int i=0;
-    
+    int i = 0;
+
     String nombres[];
     int edades[];
     String alturas[];
-    
-    
+
     public Main() {
         initComponents();
-        lblTitulo.setText("Registro "+(i+1));
+        lblTitulo.setText("Registro " + (i + 1));
         btnMostrar.setEnabled(false);
         btnPromedio.setEnabled(false);
         toogle.setEnabled(false);
-        
-        nombres=new String[5];
-        edades=new int[5];
-        alturas=new String[5];
-   }
-    
-    public void limpiarCajas(){
+
+        nombres = new String[5];
+        edades = new int[5];
+        alturas = new String[5];
+    }
+
+    public void limpiarCajas() {
         txtNombre.setText("");
         txtEdad.setText("");
         txtAltura.setText("");
     }
-    
-    public boolean validaCajasTexto(){
-        
-        if(txtNombre.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Asegurate de llenar la caja de texto del nombre","EROR",JOptionPane.ERROR_MESSAGE);
+
+    public boolean validaCajasTexto() {
+
+        if (txtNombre.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Asegurate de llenar la caja de texto del nombre", "EROR", JOptionPane.ERROR_MESSAGE);
             return false;
-        }else if(txtEdad.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Asegurate de llenar la caja de texto de la edad","EROR",JOptionPane.ERROR_MESSAGE);
+        } else if (txtEdad.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Asegurate de llenar la caja de texto de la edad", "EROR", JOptionPane.ERROR_MESSAGE);
             return false;
-        }else if(txtAltura.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Asegurate de llenar la caja de texto de la altura","EROR",JOptionPane.ERROR_MESSAGE);
+        } else if (txtAltura.getText().equals("")) {
+            JOptionPane.showMessageDialog(null, "Asegurate de llenar la caja de texto de la altura", "EROR", JOptionPane.ERROR_MESSAGE);
             return false;
-        }else if(!Pattern.matches("\\d{1}.\\d{2}", txtAltura.getText())){
-            JOptionPane.showMessageDialog(null,"La altura no esta escrita como debe ser","EROR",JOptionPane.ERROR_MESSAGE);
+        } else if (!Pattern.matches("\\d{1}.\\d{2}", txtAltura.getText())) {
+            JOptionPane.showMessageDialog(null, "La altura no esta escrita como debe ser", "EROR", JOptionPane.ERROR_MESSAGE);
             return false;
         }
-        
+
         return true;
     }
 
@@ -125,6 +124,11 @@ public class Main extends javax.swing.JFrame {
 
         toogle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         toogle.setText("EDITAR");
+        toogle.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toogleActionPerformed(evt);
+            }
+        });
 
         btnPromedio.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         btnPromedio.setText("CALULAR PROMEDIO");
@@ -205,19 +209,20 @@ public class Main extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        if(i<=4){
-            if(validaCajasTexto()){
-               nombres[i]=txtNombre.getText();
-               edades[i]=Integer.parseInt(txtEdad.getText());
-               alturas[i]=txtAltura.getText();
-               limpiarCajas();
-               i++;
-               if(i<=4)
-                    lblTitulo.setText("Registro "+(i+1));
-               JOptionPane.showMessageDialog(null,"El registro fue guardado con exito");
+        if (i <= 4) {
+            if (validaCajasTexto()) {
+                nombres[i] = txtNombre.getText();
+                edades[i] = Integer.parseInt(txtEdad.getText());
+                alturas[i] = txtAltura.getText();
+                limpiarCajas();
+                i++;
+                if (i <= 4) {
+                    lblTitulo.setText("Registro " + (i + 1));
+                }
+                JOptionPane.showMessageDialog(null, "El registro fue guardado con exito");
             }
-        }else{
-            JOptionPane.showMessageDialog(null,"Ya completaste el total de 5 registros");
+        } else {
+            JOptionPane.showMessageDialog(null, "Ya completaste el total de 5 registros");
             btnGuardar.setEnabled(false);
             btnMostrar.setEnabled(true);
             btnPromedio.setEnabled(true);
@@ -227,26 +232,54 @@ public class Main extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarActionPerformed
 
     private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
-        String muestra="Nombre          Edad            Altura\n";
-        for(int j=0;j<5;j++){
-            muestra+=nombres[j]+"           "+edades[j]+"           "+alturas[j]+"\n";
+        String muestra = "Nombre          Edad            Altura\n";
+        for (int j = 0; j < 5; j++) {
+            muestra += nombres[j] + "           " + edades[j] + "           " + alturas[j] + "\n";
         }
-        JOptionPane.showMessageDialog(null,muestra);
+        JOptionPane.showMessageDialog(null, muestra);
     }//GEN-LAST:event_btnMostrarActionPerformed
 
     private void btnPromedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromedioActionPerformed
-        float promedio=0;
-        for(int j=0;j<5;j++){
-            promedio+=edades[j];
+        float promedio = 0;
+        for (int j = 0; j < 5; j++) {
+            promedio += edades[j];
         }
-        JOptionPane.showMessageDialog(null,"El promedio es "+(promedio/5));
+        JOptionPane.showMessageDialog(null, "El promedio es " + (promedio / 5));
     }//GEN-LAST:event_btnPromedioActionPerformed
 
     private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
         char c = evt.getKeyChar();
-        if (!(Character.isDigit(c))||c==evt.VK_BACK_SPACE) 
+        if (!(Character.isDigit(c)) || c == evt.VK_BACK_SPACE) {
             evt.consume();
+        }
     }//GEN-LAST:event_txtEdadKeyTyped
+    int busca;
+    private void toogleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toogleActionPerformed
+        
+        if (toogle.isSelected()) {
+            Object[] options = {"1 "+nombres[0], "2 "+nombres[1], "3 "+nombres[2], "4 "+nombres[3],
+                "5 "+nombres[4]};
+            String opcion = (String) JOptionPane.showInputDialog(null,"Selecciona el registro a modificar", "Elegir",JOptionPane.QUESTION_MESSAGE,null,options, options[0]);
+            if(opcion!=null){
+               busca= Integer.parseInt(opcion.substring(0,1))-1;
+               txtNombre.setText(nombres[busca]);
+               txtEdad.setText(""+edades[busca]);
+               txtAltura.setText(alturas[busca]);
+            }else{
+                toogle.setSelected(false);
+            }
+        } else {
+            if(validaCajasTexto()){
+               nombres[busca] = txtNombre.getText();
+               edades[busca] = Integer.parseInt(txtEdad.getText());
+               alturas[busca] = txtAltura.getText();
+               limpiarCajas();
+               JOptionPane.showMessageDialog(null,"El registro fue modificado exitosamente");
+            }else{
+               toogle.setSelected(true);
+            }
+        }
+    }//GEN-LAST:event_toogleActionPerformed
 
     /**
      * @param args the command line arguments
