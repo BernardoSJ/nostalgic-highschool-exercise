@@ -1,3 +1,7 @@
+
+import java.util.regex.Pattern;
+import javax.swing.JOptionPane;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -6,15 +10,55 @@
 
 /**
  *
- * @author berna
+ * @author Bernardo Salinas Jaquez
  */
 public class Main extends javax.swing.JFrame {
 
     /**
      * Creates new form Main
      */
+    int i=0;
+    
+    String nombres[];
+    int edades[];
+    String alturas[];
+    
+    
     public Main() {
         initComponents();
+        lblTitulo.setText("Registro "+(i+1));
+        btnMostrar.setEnabled(false);
+        btnPromedio.setEnabled(false);
+        toogle.setEnabled(false);
+        
+        nombres=new String[5];
+        edades=new int[5];
+        alturas=new String[5];
+   }
+    
+    public void limpiarCajas(){
+        txtNombre.setText("");
+        txtEdad.setText("");
+        txtAltura.setText("");
+    }
+    
+    public boolean validaCajasTexto(){
+        
+        if(txtNombre.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Asegurate de llenar la caja de texto del nombre","EROR",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(txtEdad.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Asegurate de llenar la caja de texto de la edad","EROR",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(txtAltura.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Asegurate de llenar la caja de texto de la altura","EROR",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }else if(!Pattern.matches("\\d{1}.\\d{2}", txtAltura.getText())){
+            JOptionPane.showMessageDialog(null,"La altura no esta escrita como debe ser","EROR",JOptionPane.ERROR_MESSAGE);
+            return false;
+        }
+        
+        return true;
     }
 
     /**
@@ -26,21 +70,183 @@ public class Main extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtNombre = new javax.swing.JTextField();
+        txtEdad = new javax.swing.JTextField();
+        txtAltura = new javax.swing.JTextField();
+        btnGuardar = new javax.swing.JButton();
+        btnMostrar = new javax.swing.JButton();
+        toogle = new javax.swing.JToggleButton();
+        btnPromedio = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel1.setText("Nombre:");
+
+        lblTitulo.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        lblTitulo.setText("Registro");
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel3.setText("Altura:");
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        jLabel4.setText("Edad:");
+
+        txtNombre.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        txtEdad.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        txtEdad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtEdadKeyTyped(evt);
+            }
+        });
+
+        txtAltura.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+
+        btnGuardar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
+
+        btnMostrar.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnMostrar.setText("MOSTRAR DATOS");
+        btnMostrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMostrarActionPerformed(evt);
+            }
+        });
+
+        toogle.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        toogle.setText("EDITAR");
+
+        btnPromedio.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
+        btnPromedio.setText("CALULAR PROMEDIO");
+        btnPromedio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPromedioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 274, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnGuardar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnMostrar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(toogle)))
+                .addContainerGap(25, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnPromedio)
+                .addGap(122, 122, 122))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addContainerGap(235, Short.MAX_VALUE)
+                    .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 129, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(181, 181, 181)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(22, 22, 22)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtEdad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(23, 23, 23)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtAltura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnGuardar)
+                    .addComponent(btnMostrar)
+                    .addComponent(toogle))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnPromedio)
+                .addContainerGap(62, Short.MAX_VALUE))
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(23, 23, 23)
+                    .addComponent(lblTitulo)
+                    .addContainerGap(387, Short.MAX_VALUE)))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        if(i<=4){
+            if(validaCajasTexto()){
+               nombres[i]=txtNombre.getText();
+               edades[i]=Integer.parseInt(txtEdad.getText());
+               alturas[i]=txtAltura.getText();
+               limpiarCajas();
+               i++;
+               if(i<=4)
+                    lblTitulo.setText("Registro "+(i+1));
+               JOptionPane.showMessageDialog(null,"El registro fue guardado con exito");
+            }
+        }else{
+            JOptionPane.showMessageDialog(null,"Ya completaste el total de 5 registros");
+            btnGuardar.setEnabled(false);
+            btnMostrar.setEnabled(true);
+            btnPromedio.setEnabled(true);
+            toogle.setEnabled(true);
+            limpiarCajas();
+        }
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnMostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMostrarActionPerformed
+        String muestra="Nombre          Edad            Altura\n";
+        for(int j=0;j<5;j++){
+            muestra+=nombres[j]+"           "+edades[j]+"           "+alturas[j]+"\n";
+        }
+        JOptionPane.showMessageDialog(null,muestra);
+    }//GEN-LAST:event_btnMostrarActionPerformed
+
+    private void btnPromedioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPromedioActionPerformed
+        float promedio=0;
+        for(int j=0;j<5;j++){
+            promedio+=edades[j];
+        }
+        JOptionPane.showMessageDialog(null,"El promedio es "+(promedio/5));
+    }//GEN-LAST:event_btnPromedioActionPerformed
+
+    private void txtEdadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtEdadKeyTyped
+        char c = evt.getKeyChar();
+        if (!(Character.isDigit(c))||c==evt.VK_BACK_SPACE) 
+            evt.consume();
+    }//GEN-LAST:event_txtEdadKeyTyped
 
     /**
      * @param args the command line arguments
@@ -78,5 +284,16 @@ public class Main extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnMostrar;
+    private javax.swing.JButton btnPromedio;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JToggleButton toogle;
+    private javax.swing.JTextField txtAltura;
+    private javax.swing.JTextField txtEdad;
+    private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
 }
